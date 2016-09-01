@@ -992,7 +992,7 @@
         getSize();
         this.$searchbox
           .off('input.getSize propertychange.getSize')
-          .on('input.getSize propertychange.getSize', delayedFn(1200, getSize));
+          .on('input.getSize propertychange.getSize', delayedFn(600, getSize));
         $window.off('resize.getSize scroll.getSize').on('resize.getSize scroll.getSize', getSize);
       } else if (this.options.size && this.options.size != 'auto' && this.$lis.not(notDisabled).length > this.options.size) {
         var optIndex = this.$lis.not('.divider').not(notDisabled).children().slice(0, this.options.size).last().parent().index(),
@@ -1402,7 +1402,7 @@
         e.stopPropagation();
       });
 
-      this.$searchbox.on('input propertychange', delayedFn(500, function () {
+      this.$searchbox.on('input propertychange', delayedFn(300, function () {
         if (that.$searchbox.val()) {
           var $searchBase = that.$lis.not('.is-hidden').removeClass('hidden').children('a');
           if (that.options.liveSearchNormalize) {
@@ -1453,8 +1453,8 @@
         }
 
         that.$lis.filter('.active').removeClass('active');
-        if (that.$searchbox.val()) that.$lis.not('.hidden, .divider, .dropdown-header').eq(0).addClass('active').children('a').focus();
-        $(this).focus();
+        //if (that.$searchbox.val()) that.$lis.not('.hidden, .divider, .dropdown-header').eq(0).addClass('active').children('a').focus();
+        //$(this).focus();
       }));
     },
 
@@ -1528,7 +1528,7 @@
       this.$button.trigger('click');
     },
 
-    keydown: delayedFn(700, function (e) {
+    keydown: function (e) {
       var $this = $(this),
           $parent = $this.is('input') ? $this.parent().parent() : $this.parent(),
           $items,
@@ -1737,7 +1737,7 @@
         if (that.options.container) that.$newElement.removeClass('open');
         that.$button.focus();
       }
-    }),
+    },
 
     mobile: function () {
       this.$element.addClass('mobile-device');
